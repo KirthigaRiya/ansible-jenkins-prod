@@ -29,6 +29,7 @@ pipeline {
           cd ansible
           ansible-playbook -i inventory.ini diskUsageCheck.yml
         '''
+        archiveArtifacts artifacts: 'ansible/df_output_*.txt', fingerprint: true
       }
     }
   }

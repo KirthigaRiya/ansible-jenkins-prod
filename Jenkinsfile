@@ -26,7 +26,7 @@ pipeline {
     stage('Run Ansible Playbook') {
       steps {
         sh '''
-          cd /ansible
+          cd ansible
           ansible-playbook -i inventory.ini diskUsageCheck.yml
         '''
       }

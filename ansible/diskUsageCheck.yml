@@ -1,0 +1,17 @@
+- name: Disk usage check
+  hosts: testvm
+  gather_facts: true
+
+  tasks:
+    - name: Run df -h on VM
+      command: df -h
+      register: disk_output
+
+    - name: Save output locally on Jenkins node
+      delegate_to: localhost
+      copy:
+        content: |
+          Host: {{ inventory_hostname }}
+          ===========================
+          {{ disk_output.stdout }}
+        dest: "{{ playbook_dir }}/df_output_{{ inventory_hostname }}.txt"
